@@ -17,14 +17,20 @@ public class Shop {
 
     // Метод должен вернуть отсортированный по возрастанию по цене список продуктов
     public List<Product> sortProductsByPrice() {
-        // Допишите реализацию метода самостоятельно
-        return null;
+        // Используем компаратор для сравнения продуктов по цене
+        products.sort(Comparator.comparing(Product::getCost));
+        return products;
     }
 
     // Метод должен вернуть самый дорогой продукт
     public Product getMostExpensiveProduct() {
-        // Допишите реализацию метода самостоятельно
-        return null;
-    }
+        if (products == null || products.isEmpty()) {
+            return null; // Вернуть null, если список продуктов пуст
+        }
 
+        // Используем стрим для поиска максимальной цены
+        return products.stream()
+            .max(Comparator.comparing(Product::getCost))
+            .orElse(null); // Вернуть null, если максимальный элемент не найден
+    }
 }
